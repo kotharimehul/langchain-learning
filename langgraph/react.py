@@ -1,0 +1,18 @@
+from langchain_openai import ChatOpenAI
+from langchain_tavily import TavilySearch
+from langchain_core import tools
+from dotenv import load_dotenv
+
+load_dotenv()
+
+def triple(num:float) -> float:
+    """
+    param num: a number to triple
+    returns: triple of the input number
+    """
+
+    return float(num)*3
+
+tools=[TavilySearch(max_results=1),triple]
+
+llm=ChatOpenAI(model="gpt-4o-mini",temperature=0).bind_tools(tools)
